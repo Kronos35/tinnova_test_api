@@ -25,3 +25,4 @@
 # Ignore idea files
 .idea
 /.idea
+/.env

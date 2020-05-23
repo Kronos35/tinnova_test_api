@@ -17,9 +17,7 @@ module Auth
       private
 
       def meta
-        {
-            exp: 4.hours.from_now.to_i,
-        }
+        { exp: 4.hours.from_now.to_i }
       end
 
       def key
