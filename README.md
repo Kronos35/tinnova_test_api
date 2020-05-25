@@ -167,10 +167,10 @@ The only POST request for the API is **/beers/:id/set_favorite** so make sure to
 
 ### Short explanation
 
-I decided to use ActiveRecord import for the application to be updated *faster* and more *efficiently* using a *single query* instead of creating each beer 1 by 1.
+I decided to use ActiveRecord import for the application to be updated **faster** and more **efficiently** using a **single query** instead of creating each beer 1 by 1.
 To do so I first query the **PUNKAPI** and update/create the beers if they don't exist or need to be updated.
 
 Since I didn't want to have duplicate beers in the database I decided to store them in a table independent from the users.
-To link them and store relevant information between users and beers, I created a simple model that functions as a pivot table called *UserBeer*.
+To link them and store relevant information between users and beers, I created a simple model that functions as a pivot table called **UserBeer**.
 
-The *UserBeer* model describes when a user *saw* a *Beer*, which beers are their *favorites*. It also serves as an index table to link *users* and *beers* together.
+The **UserBeer** model describes when a user **saw** a **Beer**, which beers are their **favorites**. It also serves as an index table to link **users** and **beers** together.
