@@ -114,27 +114,48 @@ Run the projects
 rails s
 ```
 
-## Instructions
+## Evaluation
 
-To be able to test the application authenticate using an application the following credentials:
+### Setup
 
+Copy environment variables
+```bash
+cp .env.sample .env
 ```
+
+Modify the contents of the **.env** file to match the credentials of your own **PostgreSQL** server
+```
+DB_USER=user
+DB_PASSWORD=example
+DB_HOST=localhost
+```
+
+Migrate the application easily by running the following rake command:
+```bash
+rails db:create db:migrate db:seed
+```
+
+To be able to test the application authenticate using the following credentials as explained in the exercise's instructions:
+
+``` ruby
 user: {
   username: 'admin',
   password: 'admin'
 }
 ```
 
-that will return the following token:
+That will return the following token:
 
-``eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTA0NTg0MzEsImlkIjoxLCJuYW1lIjoiQWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.Gi0SiqpnhUzMcU4sG9o6ccTU3QhCEEMMC5eOxi0BY6A``
+```
+eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTA0NTg0MzEsImlkIjoxLCJuYW1lIjoiQWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.Gi0SiqpnhUzMcU4sG9o6ccTU3QhCEEMMC5eOxi0BY6A
+```
 
 The following are the routes to test the applications, remember to add the correct headers to your requests using POSTman
 
-```
-                    beers GET  /beers(.:format)                                                                         beers#index
-                     beer GET  /beers/:id(.:format)                                                                     beers#show
-        set_favorite_beer POST /beers/:id/set_favorite(.:format)                                                        beers#set_favorite
+```ruby
+                    beers GET  /beers(.:format)                        beers#index
+                     beer GET  /beers/:id(.:format)                    beers#show
+        set_favorite_beer POST /beers/:id/set_favorite(.:format)       beers#set_favorite
 ```
 
 To filter the beers by `name` or `abv`. Add those values into a variable called **query** to your request like follows:
@@ -143,3 +164,13 @@ To filter the beers by `name` or `abv`. Add those values into a variable called 
 ``
 
 The only POST request for the API is **/beers/:id/set_favorite** so make sure to test accordingly
+
+### Short explanation
+
+I decided to use ActiveRecord import for the application to be updated *faster* and more *efficiently* using a *single query* instead of creating each beer 1 by 1.
+To do so I first query the **PUNKAPI** and update/create the beers if they don't exist or need to be updated.
+
+Since I didn't want to have duplicate beers in the database I decided to store them in a table independent from the users.
+To link them and store relevant information between users and beers, I created a simple model that functions as a pivot table called *UserBeer*.
+
+The *UserBeer* model describes when a user *saw* a *Beer*, which beers are their *favorites*. It also serves as an index table to link *users* and *beers* together.
