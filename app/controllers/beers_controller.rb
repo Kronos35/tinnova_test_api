@@ -51,9 +51,14 @@ class BeersController < ApplicationController
   end
 
   def update_beer!
-    @beer = Beer.find_or_create_by(id: api_beer[:id])
-    @beer.assign_attributes api_beer.slice(*beer_attribute_names)
-    @beer.save! if @beer.changed?
+    @_beer = Beer.find_or_create_by(id: api_beer[:id])
+    @_beer.assign_attributes api_beer.slice(*beer_attribute_names)
+    @_beer.save! if @_beer.changed?
+    associate_beer!
+  end
+
+  def associate_beer!
+    @beer = UserBeer.find_or_create_by!(user: @current_user, beer: @_beer)
   end
 
   def beer_attribute_names

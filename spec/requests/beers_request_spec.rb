@@ -127,12 +127,15 @@ describe "Beers", '#show' do
     end
 
     context 'does not have beers stored in the application' do
+      it 'associates user and beer' do
+        expect { subject }.to change { user.beers.count }.by 1
+      end
+
       it 'successfuly saves & recovers user beer' do
-        expect { subject }.to change { Beer.count }
+        expect { subject }.to change { Beer.count }.by 1
         expect(response).to be_successful
         expect(json_response['beer']).to include(expected_beer_response)
       end
     end
   end
-
 end

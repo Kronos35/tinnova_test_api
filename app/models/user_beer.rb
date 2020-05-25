@@ -35,8 +35,10 @@ class UserBeer < ApplicationRecord
       "tagline" => self.tagline, 
       "description" => self.description, 
       "abv" => self.abv, 
-      "seen_at" => self.seen_at,
       "favorite" => self.favorite?,
+      "seen_at" => self.seen_at,
+      "created_at" => self.created_at,
+      "updated_at" => self.updated_at
     }
   end
   
