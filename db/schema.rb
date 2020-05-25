@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 2020_05_25_073633) do
     t.string "tagline"
     t.text "description"
     t.float "abv"
-    t.datetime "seen_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_073633) do
     t.bigint "user_id"
     t.bigint "beer_id"
     t.boolean "favorite", default: false
+    t.datetime "seen_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["beer_id"], name: "index_user_beers_on_beer_id"

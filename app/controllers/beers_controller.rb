@@ -13,6 +13,7 @@ class BeersController < ApplicationController
   end
 
   def set_favorite
+    @beer.mark_as_favorite!
     render json: { beer: @beer }
   end
 
@@ -59,6 +60,7 @@ class BeersController < ApplicationController
 
   def associate_beer!
     @beer = UserBeer.find_or_create_by!(user: @current_user, beer: @_beer)
+    @beer.mark_as_read!
   end
 
   def beer_attribute_names

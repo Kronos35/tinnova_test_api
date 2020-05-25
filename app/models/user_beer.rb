@@ -41,5 +41,13 @@ class UserBeer < ApplicationRecord
       "updated_at" => self.updated_at
     }
   end
+
+  def mark_as_favorite!
+    update_attributes favorite: true, seen_at: Time.current
+  end
+
+  def mark_as_read!
+    update_attributes seen_at: Time.current
+  end
   
 end
