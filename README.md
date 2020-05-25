@@ -113,3 +113,33 @@ Run the projects
 ```
 rails s
 ```
+
+## Instructions
+
+To be able to test the application authenticate using an application the following credentials:
+
+```
+user: {
+  username: 'admin',
+  password: 'admin'
+}
+```
+
+that will return the following token:
+
+``eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTA0NTg0MzEsImlkIjoxLCJuYW1lIjoiQWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.Gi0SiqpnhUzMcU4sG9o6ccTU3QhCEEMMC5eOxi0BY6A``
+
+The following are the routes to test the applications, remember to add the correct headers to your requests using POSTman
+
+```
+                    beers GET  /beers(.:format)                                                                         beers#index
+                     beer GET  /beers/:id(.:format)                                                                     beers#show
+        set_favorite_beer POST /beers/:id/set_favorite(.:format)                                                        beers#set_favorite
+```
+
+To filter the beers by `name` or `abv`. Add those values into a variable called **query** to your request like follows:
+``
+  https://b968c69d.ngrok.io/beers?query=Buzz
+``
+
+The only POST request for the API is **/beers/:id/set_favorite** so make sure to test accordingly
