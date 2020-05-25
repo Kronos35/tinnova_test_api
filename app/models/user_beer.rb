@@ -15,7 +15,7 @@ class UserBeer < ApplicationRecord
   # DELEGATIONS
   # --------------------
 
-  delegate :name, :tagline, :description, :abv, :seen_at, to: :beer
+  delegate :name, :tagline, :description, :abv, to: :beer
 
   # SCOPES
   # --------------------
@@ -30,15 +30,15 @@ class UserBeer < ApplicationRecord
 
   def as_json(*args)
     {
-      "id" => self.beer_id,
-      "name" => self.name,
-      "tagline" => self.tagline, 
-      "description" => self.description, 
-      "abv" => self.abv, 
-      "favorite" => self.favorite?,
-      "seen_at" => self.seen_at,
-      "created_at" => self.created_at,
-      "updated_at" => self.updated_at
+      "id" => beer_id,
+      "name" => name,
+      "tagline" => tagline, 
+      "description" => description, 
+      "abv" => abv, 
+      "favorite" => favorite?,
+      "seen_at" => seen_at,
+      "created_at" => created_at,
+      "updated_at" => updated_at
     }
   end
 
